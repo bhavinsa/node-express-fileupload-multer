@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+
+    $(function () {
+      $("#registerform").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+          url: "http://localhost:3000/profile",
+          type: 'POST',
+          data: formData,
+          success: function (data) {
+            alert(data.message);
+            $('#registerform')[0].reset();
+          },
+          cache: false,
+          contentType: false,
+          processData: false
+        });
+      });
+    }); 
+  </script>
+
+</head>
+
+<body>
+  <h1>{{title}}</h1>
+  <form id="registerform" enctype="multipart/form-data">
+    <p>{{message}}</p>
+    <label> Name: </label><input type="text" name="name" id="name" />
+    <br><br>
+    <input type="file" name="avatar" id="avatar" />
+    <br><br>
+    <input type="submit" value="Add" id="add">
+  </form>
+</body>
+
+</html>
